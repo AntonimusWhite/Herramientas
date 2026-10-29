@@ -1,1 +1,1 @@
-print("Ariel es tonto")
+print("Ariel es machista")
