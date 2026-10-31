@@ -123,3 +123,50 @@ def mejor_individuo(population, fitnesses):
     mejor_individual = population[posicion]
     return mejor_individual, mejor_fitness
 
+# 6.
+def run_genetic_algorithm(population_size, individual_size, num_generations, mutation_rate, individual_generator, fitness_function, crossover_function, mutation_function, *args):
+    population = generate_population(population_size, individual_generator, individual_size) #fun del ej 1
+
+    fitnesses = [] #calcular fitnesses iniciales
+    for individual in population:  #recorre todos los individuos y calcula el fitness
+        fitness = fitness_function(individual, *args) #fitness function sera onemax o tsp, en onemax args esta vacio, en tsp recibe distancias
+        fitnesses.append(fitness)
+    mejor_individual_global, mejor_fitness_global = mejor_individuo(population, fitnesses) #guardamos el mejor individuo inicial de la poblacion y el fitness
+
+    #Repetir durante num_generations generaciones
+    for generacion in range(num_generations):
+        #creo padres
+        mating_pool = crearmatingpool(population, fitnesses)
+        #Cruzar padres y generar hijos, ejercicio 3 lab03
+        new_population = []
+        for i in range(0, len(mating_pool)-1, 2): #gestionar poblacion impar
+            parent1 = mating_pool[i]
+            parent2 = mating_pool[i+1]
+            child1, child2 = crossover_function(parent1, parent2)
+            new_population.append(child1)
+            new_population.append(child2)
+
+        # Si la población es impar, conservamos un padre sin cruzarlo
+        if len(mating_pool) % 2 != 0:
+            new_population.append(mating_pool[-1].copy())
+
+        # Mutar hijos
+        for individual in new_population:
+            mutation_function(individual, mutation_rate)
+
+        # Sustituir población anterior por la nueva
+        population = new_population
+
+        #Calcular los nuevos fitnesses y actualizar el mejor individuo
+        fitnesses = []
+        for individual in population:
+            fitness = fitness_function(individual)
+            fitnesses.append(fitness)
+
+        mejor_individual, mejor_fitness = mejor_individuo(population, fitnesses)
+
+        if mejor_fitness > mejor_fitness_global:
+            mejor_fitness_global = mejor_fitness
+            mejor_individual_global = mejor_individual.copy()
+
+    return mejor_individual_global, mejor_fitness_global
