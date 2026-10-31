@@ -1,152 +1,219 @@
-###############
-# EJERCICIO 1 #
-###############
 import math
 import random
 import time
 
-def generate_individual_bitstring(size):
-    individual= []
-    while size > 0:
-        n_aleatorio = random.randint(0,1)
-        individual.append(n_aleatorio)
-        size -= 1
-    return individual
+# 1. generacion indivisuos
+def generate_individual_bitstring(size): #onemax
+    individuo = []
+    for i in range(size):
+        gen = random.randint(0, 1)
+        individuo.append(gen)
+    return individuo
 
-def generate_individual_permutation(size):
-    lista_pos = [i for i in range(size)]
-    random.shuffle(lista_pos)
-    return lista_pos
+def generate_individual_permutation(size): #tsp
+    individuo = list(range(size))
+    random.shuffle(individuo)
+    return individuo
 
-def generate_population(population_size, individual_generator_size, size):
+#Generacion poblaciones
+def generate_population(population_size, individual_generator, size):
     poblacion = []
-    for _ in range(population_size):
-        individual = individual_generator_size(size)
-        poblacion.append(individual)
+    for i in range(population_size):
+        individuo = individual_generator(size)
+        poblacion.append(individuo)
     return poblacion
 
-###############
-# EJERCICIO 2 #
-###############
-def tsp_distance(route):
+# 2. funciones fitness
+# Calculamos el FITNESS ONEMAX de cada individuo, maximizar los unos
+def fitness_onemax(individual):
+    fitness = 0
+    for genes in individual: #para cada gen en individual
+        fitness = fitness + genes #sumo cada gen al fitness.
+    return fitness
+
+# fitness tsp
+#distances ya no es una variable global por lo que hay que llamarla
+def tsp_distance(route, distances):
     suma_total = 0
     for i in range(len(route)):
         suma_total = distances[route[i]][route[(i+1)%len(route)]] + suma_total
-
     return suma_total
 
-def fitness_tsp(route):
-    suma_total = tsp_distance(route)
-
+def fitness_tsp(route, distances):
+    suma_total = tsp_distance(route, distances)
     return 1/suma_total
 
-###############
-# EJERCICIO 3 #
-###############
+# 3. cruce
+# punto donde se cruzan dos individuos
 def generate_cut_point(gene_length):
-    aleatorio = random.randint(2, gene_length-2)
-    return aleatorio
+    return random.randint(2, gene_length-2)
 
-def fill_remaining_in_order(fixed_segment, source_parent):
-    lista_nueva = []
-    i=0
-    while (len(fixed_segment)<len(source_parent)) and i<len(source_parent):
-        if source_parent[i] not in fixed_segment:
-            lista_nueva.append(source_parent[i])
-            i+=1
-        else: 
-            i+=1
-    return lista_nueva
-
+# Cruce de un punto para individuos OneMax
 def crossover_bitstring(parent1, parent2):
-    cruce = generate_cut_point(len(parent1))
-    child1 = parent1[:cruce] + parent2[cruce:]
-    child2 = parent2[:cruce] + parent1[cruce:]
-    return child1,child2
-
-
-def crossover_permutation(parent1, parent2):
-    cruce = generate_cut_point(len(parent1))
-    l1= fill_remaining_in_order(parent1[:cruce], parent2)
-    l2= fill_remaining_in_order(parent2[:cruce], parent1)
-    child1 = parent1[:cruce] + l1
-    child2  = parent2[:cruce] + l2
+    gene_length = len(parent1)
+    puntocruce = generate_cut_point(gene_length)
+    child1 = parent1[:puntocruce] + parent2[puntocruce:]
+    child2 = parent2[:puntocruce] + parent1[puntocruce:]
     return child1, child2
 
-###############
-# EJERCICIO 4 #
-###############
+# Obtiene las ciudades que faltan sin repetir las del segmento fijo
+def fill_remaining_in_order(fixed_segment, source_parent):
+    lista = []
+    for i in range(len(source_parent)):
+        if source_parent[i] not in fixed_segment:
+            lista.append(source_parent[i])
+    return lista
+
+# Cruce de permutaciones para TSP
+def crossover_permutation(parent1, parent2):
+    gene_length = len(parent1)
+    punto = generate_cut_point(gene_length)
+
+    # Conservamos una parte de cada padre y completamos con las ciudades restantes
+    child1 = parent1[:punto] + fill_remaining_in_order(parent1[:punto], parent2)
+    child2 = parent2[:punto] + fill_remaining_in_order(parent2[:punto], parent1)
+    return child1, child2
+
+# 4. mutaciones
+# OneMax cambiar de 0 a 1 o viceversa
 def mutate_bitstring(individual, mutation_rate):
-    for i in range(len(individual)):
+    for gen in range(len(individual)):
         if random.random() < mutation_rate:
-            if individual[i]==0:
-                individual[i]=1
+            if individual[gen] == 0:
+                individual[gen] = 1
             else:
-                individual[i]=0
+                individual[gen] = 0
     return individual
 
-
-def swap_mutation(individual, mutation_rate): 
-    x = random.random()
-    if x < mutation_rate:
-        pos1 = random.randint(0,len(individual)-1)
-        pos2 = random.randint(0,len(individual)-1)
-        while pos2==pos1:
-            pos2 = random.randint(0,len(individual)-1)
-        individual[pos1],individual[pos2] = individual[pos2],individual[pos1]
+# TSP intercambia dos ciudades de la ruta
+def swap_mutation(individual, mutation_rate):
+    #posiciones de individual
+    if random.random() < mutation_rate:
+        posicion1 = random.randint(0, len(individual)-1)
+        posicion2 = random.randint(0, len(individual)-1)
+        while posicion1 == posicion2:
+            posicion2 = random.randint(0, len(individual)-1)
+        individual[posicion1], individual[posicion2] = individual[posicion2], individual[posicion1]
     return individual
 
-###############
-# EJERCICIO 5 #
-###############
-def fitness_onemax(individuo):
-    contador=0
-    for i in individuo:
-        if i==1:
-            contador+=1
-    return contador
-
-def obtener_fitnesses(poblacion):
-    fitnesses = []
-    for indiv in poblacion:
-        fitness= fitness_onemax(indiv)
-        fitnesses.append(fitness)
-    return fitnesses
-
-def mating_pool_poblacion(poblacion, fitnesses):
+# 5. seleccion mejor individuo
+def crearmatingpool(population, fitnesses):
     mating_pool = []
-    for _ in range(2):
-        lista_vacia = []
-        for i in range(len(poblacion)):
-            lista_vacia.append(i)
-        random.shuffle(lista_vacia)
-        for i in range(0,len(lista_vacia)-1,2):
-            pos1 = lista_vacia[i]
-            pos2 = lista_vacia[i+1]
-            if fitnesses[pos1] > fitnesses[pos2]:
-                mating_pool.append(poblacion[pos1])
+    repeticion =0
+    while repeticion <2: #repetir dos veces
+        #creo lista desde 0 hasta population size -1
+        lista = list(range(len(population)))
+        random.shuffle(lista) #barajar 
+        #recorrer la lista en pares
+        for i in range(0, len(lista), 2):
+            posicion = lista[i] #me guardo la posicion del primer individuo
+            posicion2 = lista[i+1] #posicion del segundo individuo
+            #comparo los fitnesses de cada pareja
+            if fitnesses[posicion] >= fitnesses[posicion2]:
+                mating_pool.append(population[posicion]) #population tiene a los individuos
             else:
-                mating_pool.append(poblacion[pos2])
+                mating_pool.append(population[posicion2])
+        repeticion = repeticion +1
     return mating_pool
 
-def run_genetic_algorithm(population_size, individual_size, num_generations, mutation_rate, individual_generator, fitness_function, crossover_function, mutation_function):
-    poblacion = generate_population(population_size, individual_generator, individual_size)
-    j = 0
-    while j < num_generations:
-        fitnesses = [fitness_function(individual) for individual in poblacion]
-        mating_pool_nueva = mating_pool_poblacion(poblacion, fitnesses)
+# Obtiene el mejor individuo de una población y su fitness
+def mejor_individuo(population, fitnesses):
+    mejor_fitness = max(fitnesses)
+    posicion = fitnesses.index(mejor_fitness)
+    mejor_individual = population[posicion]
+    return mejor_individual, mejor_fitness
+
+# 6.
+
+# Comprueba si se ha alcanzado el óptimo conocido
+def optimo_alcanzado(mejor_fitness, optimo_conocido, tipo):
+    if optimo_conocido is None:
+        return False
+
+    if tipo == "onemax":
+        return mejor_fitness >= optimo_conocido
+    elif tipo == "tsp":
+        # óptimo conocido representa la distancia mínima
+        if mejor_fitness == float("inf"):
+            distancia = 0
+        else:
+            distancia = 1 / mejor_fitness
+        return distancia <= optimo_conocido
+    return False
+
+def run_genetic_algorithm(population_size, individual_size, num_generations, mutation_rate, individual_generator, fitness_function, 
+                          crossover_function, mutation_function, optimo_conocido=None, tipo=None, *args):
+    
+    # Iniciamos el cronómetro
+    inicio = time.perf_counter()
+    tiempo_optimo = None
+
+    population = generate_population(population_size, individual_generator, individual_size) #fun del ej 1
+
+    fitnesses = [] #calcular fitnesses iniciales
+    for individual in population:  #recorre todos los individuos y calcula el fitness
+        fitness = fitness_function(individual, *args) #fitness function sera onemax o tsp, en onemax args esta vacio, en tsp recibe distancias
+        fitnesses.append(fitness)
+
+    #guardamos el mejor individuo inicial de la poblacion y el fitness
+    mejor_individual_global, mejor_fitness_global = mejor_individuo(population, fitnesses)
+    mejor_individual_global = mejor_individual_global.copy()
+
+    # Comprobamos si el óptimo está en la población inicial
+    if optimo_alcanzado(mejor_fitness_global, optimo_conocido, tipo):
+        tiempo_optimo = time.perf_counter() - inicio
+        tiempo_total = time.perf_counter() - inicio
+        return mejor_individual_global, mejor_fitness_global, tiempo_total, tiempo_optimo
+
+    #Repetir durante num_generations generaciones
+    for generacion in range(num_generations):
+        #creo padres
+        mating_pool = crearmatingpool(population, fitnesses)
+
+        # conservamos el mejor individuo de la poblacion inicial
+        elite, fitness_elite = mejor_individuo(population, fitnesses)
+        elite = elite.copy()
+
+        #Cruzar padres y generar hijos, ejercicio 3 lab03
         new_population = []
-        for i in range(0,len(mating_pool_nueva)-1,2):
-            cross1, cross2 = crossover_function(mating_pool_nueva[i],mating_pool_nueva[i+1])
-            new_population.append(cross1)
-            new_population.append(cross2)
-        new_population = [mutation_function(individual,mutation_rate) for individual in new_population]
-        poblacion = new_population
-        j += 1
+        for i in range(0, len(mating_pool)-1, 2): #gestionar poblacion impar
+            parent1 = mating_pool[i]
+            parent2 = mating_pool[i+1]
+            child1, child2 = crossover_function(parent1, parent2)
+            new_population.append(child1)
+            new_population.append(child2)
 
-    fitnesses = [fitness_function(individual) for individual in poblacion]
-    best_index = fitnesses.index(max(fitnesses))
-    best_individual = poblacion[best_index]
-    best_fitness = fitnesses[best_index]
+        # Si la población es impar, conservamos un padre sin cruzarlo
+        if len(mating_pool) % 2 != 0:
+            new_population.append(mating_pool[-1].copy())
 
-    return best_individual, best_fitness
+        # Mutar hijos
+        for individual in new_population:
+            mutation_function(individual, mutation_rate)
+
+        #introducimos el mejor individuo sin mutarlo
+        new_population[0] = elite
+
+        # Sustituir población anterior por la nueva
+        population = new_population
+
+        #Calcular los nuevos fitnesses y actualizar el mejor individuo
+        fitnesses = []
+        for individual in population:
+            fitness = fitness_function(individual, *args)
+            fitnesses.append(fitness)
+
+        mejor_individual, mejor_fitness = mejor_individuo(population, fitnesses)
+
+        if mejor_fitness > mejor_fitness_global:
+            mejor_fitness_global = mejor_fitness
+            mejor_individual_global = mejor_individual.copy()
+
+        # Comprobamos si hemos alcanzado el óptimo conocido
+        if optimo_alcanzado(mejor_fitness_global, optimo_conocido, tipo):
+            tiempo_optimo = time.perf_counter() - inicio
+            break
+
+    tiempo_total = time.perf_counter() - inicio #tiempo total d ela ejecucion
+
+    return mejor_individual_global, mejor_fitness_global, tiempo_total, tiempo_optimo
