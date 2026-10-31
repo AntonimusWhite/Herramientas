@@ -1,5 +1,6 @@
 import math
 import random
+import time
 
 
 # 1. generacion indivisuos
@@ -124,14 +125,43 @@ def mejor_individuo(population, fitnesses):
     return mejor_individual, mejor_fitness
 
 # 6.
-def run_genetic_algorithm(population_size, individual_size, num_generations, mutation_rate, individual_generator, fitness_function, crossover_function, mutation_function, *args):
+
+# Comprueba si se ha alcanzado el óptimo conocido
+def optimo_alcanzado(mejor_fitness, optimo_conocido, tipo):
+    if optimo_conocido is None:
+        return False
+
+    if tipo == "onemax":
+        return mejor_fitness >= optimo_conocido
+    elif tipo == "tsp":
+        # óptimo conocido representa la distancia mínima
+        if mejor_fitness == float("inf"):
+            distancia = 0
+        else:
+            distancia = 1 / mejor_fitness
+        return distancia <= optimo_conocido
+    return False
+
+def run_genetic_algorithm(population_size, individual_size, num_generations, mutation_rate, individual_generator, fitness_function, 
+                          crossover_function, mutation_function, optimo_conocido=None, tipo=None, *args):
     population = generate_population(population_size, individual_generator, individual_size) #fun del ej 1
+
+    # Iniciamos el cronómetro
+    inicio = time.perf_counter()
+    tiempo_optimo = None
 
     fitnesses = [] #calcular fitnesses iniciales
     for individual in population:  #recorre todos los individuos y calcula el fitness
         fitness = fitness_function(individual, *args) #fitness function sera onemax o tsp, en onemax args esta vacio, en tsp recibe distancias
         fitnesses.append(fitness)
-    mejor_individual_global, mejor_fitness_global = mejor_individuo(population, fitnesses) #guardamos el mejor individuo inicial de la poblacion y el fitness
+
+    #guardamos el mejor individuo inicial de la poblacion y el fitness
+    mejor_individual_global, mejor_fitness_global = mejor_individuo(population, fitnesses)
+    mejor_individual_global = mejor_individual_global.copy()
+
+    # Comprobamos si el óptimo está en la población inicial
+    if optimo_alcanzado(mejor_fitness_global, optimo_conocido, tipo):
+        tiempo_optimo = time.perf_counter() - inicio
 
     #Repetir durante num_generations generaciones
     for generacion in range(num_generations):
@@ -160,7 +190,7 @@ def run_genetic_algorithm(population_size, individual_size, num_generations, mut
         #Calcular los nuevos fitnesses y actualizar el mejor individuo
         fitnesses = []
         for individual in population:
-            fitness = fitness_function(individual)
+            fitness = fitness_function(individual, *args)
             fitnesses.append(fitness)
 
         mejor_individual, mejor_fitness = mejor_individuo(population, fitnesses)
@@ -169,4 +199,11 @@ def run_genetic_algorithm(population_size, individual_size, num_generations, mut
             mejor_fitness_global = mejor_fitness
             mejor_individual_global = mejor_individual.copy()
 
-    return mejor_individual_global, mejor_fitness_global
+        # registrar cuándo se alcanza el óptimo por primera vez
+        if tiempo_optimo is None:
+            if optimo_alcanzado(mejor_fitness_global, optimo_conocido, tipo):
+                tiempo_optimo = time.perf_counter() - inicio
+
+    tiempo_total = time.perf_counter() - inicio #tiempo total d ela ejecucion
+    
+    return mejor_individual_global, mejor_fitness_global, tiempo_total, tiempo_optimo
