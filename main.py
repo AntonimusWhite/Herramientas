@@ -41,7 +41,7 @@ def pedir_texto(mensaje):
 
 
 def pedir_si_no(mensaje, por_defecto=True):
-    #Pregunta s/n y repite hasta recibir una respuesta válida.
+    #pregunta s/n y repite hasta recibir una respuesta válida
     sufijo = " [S/n]: " if por_defecto else " [s/N]: "
     while True:
         texto = pedir_texto(mensaje + sufijo)
@@ -55,3 +55,14 @@ def pedir_si_no(mensaje, por_defecto=True):
         if texto in ("n", "no"):
             return False
         print("Responde con 's' o 'n'.")
+
+
+def num_nucleos(texto, maximo):
+    #vuelve un int entre 1 y máximo o None si la entrada no vale
+    try:
+        valor = int (texto)
+    except(ValueError, TypeError):      #devuelve None si el texto de entrada no puede ser convertido a entero 
+        return None
+    if 1 <= valor <= maximo:            #el valor de los núcleos tiene que estar entre 1 y máximo
+        return valor
+    return None
