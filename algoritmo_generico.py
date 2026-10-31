@@ -73,3 +73,27 @@ def crossover_permutation(parent1, parent2):
     child1 = parent1[:punto] + fill_remaining_in_order(parent1[:punto], parent2)
     child2 = parent2[:punto] + fill_remaining_in_order(parent2[:punto], parent1)
     return child1, child2
+
+# 4. mutaciones
+# OneMax cambiar de 0 a 1 o viceversa
+def mutate_bitstring(individual, mutation_rate):
+    for gen in range(len(individual)):
+        if random.random() < mutation_rate:
+            if individual[gen] == 0:
+                individual[gen] = 1
+            else:
+                individual[gen] = 0
+    return individual
+
+# TSP intercambia dos ciudades de la ruta
+def swap_mutation(individual, mutation_rate):
+    #posiciones de individual
+    if random.random() < mutation_rate:
+        posicion1 = random.randint(0, len(individual)-1)
+        posicion2 = random.randint(0, len(individual)-1)
+        while posicion1 == posicion2:
+            posicion2 = random.randint(0, len(individual)-1)
+        individual[posicion1], individual[posicion2] = individual[posicion2], individual[posicion1]
+    return individual
+
+
