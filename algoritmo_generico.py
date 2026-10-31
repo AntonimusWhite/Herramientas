@@ -2,7 +2,6 @@ import math
 import random
 import time
 
-
 # 1. generacion indivisuos
 def generate_individual_bitstring(size): #onemax
     individuo = []
@@ -144,11 +143,12 @@ def optimo_alcanzado(mejor_fitness, optimo_conocido, tipo):
 
 def run_genetic_algorithm(population_size, individual_size, num_generations, mutation_rate, individual_generator, fitness_function, 
                           crossover_function, mutation_function, optimo_conocido=None, tipo=None, *args):
-    population = generate_population(population_size, individual_generator, individual_size) #fun del ej 1
-
+    
     # Iniciamos el cronómetro
     inicio = time.perf_counter()
     tiempo_optimo = None
+
+    population = generate_population(population_size, individual_generator, individual_size) #fun del ej 1
 
     fitnesses = [] #calcular fitnesses iniciales
     for individual in population:  #recorre todos los individuos y calcula el fitness
@@ -162,11 +162,18 @@ def run_genetic_algorithm(population_size, individual_size, num_generations, mut
     # Comprobamos si el óptimo está en la población inicial
     if optimo_alcanzado(mejor_fitness_global, optimo_conocido, tipo):
         tiempo_optimo = time.perf_counter() - inicio
+        tiempo_total = time.perf_counter() - inicio
+        return mejor_individual_global, mejor_fitness_global, tiempo_total, tiempo_optimo
 
     #Repetir durante num_generations generaciones
     for generacion in range(num_generations):
         #creo padres
         mating_pool = crearmatingpool(population, fitnesses)
+
+        # conservamos el mejor individuo de la poblacion inicial
+        elite, fitness_elite = mejor_individuo(population, fitnesses)
+        elite = elite.copy()
+
         #Cruzar padres y generar hijos, ejercicio 3 lab03
         new_population = []
         for i in range(0, len(mating_pool)-1, 2): #gestionar poblacion impar
@@ -184,6 +191,9 @@ def run_genetic_algorithm(population_size, individual_size, num_generations, mut
         for individual in new_population:
             mutation_function(individual, mutation_rate)
 
+        #introducimos el mejor individuo sin mutarlo
+        new_population[0] = elite
+
         # Sustituir población anterior por la nueva
         population = new_population
 
@@ -199,11 +209,11 @@ def run_genetic_algorithm(population_size, individual_size, num_generations, mut
             mejor_fitness_global = mejor_fitness
             mejor_individual_global = mejor_individual.copy()
 
-        # registrar cuándo se alcanza el óptimo por primera vez
-        if tiempo_optimo is None:
-            if optimo_alcanzado(mejor_fitness_global, optimo_conocido, tipo):
-                tiempo_optimo = time.perf_counter() - inicio
+        # Comprobamos si hemos alcanzado el óptimo conocido
+        if optimo_alcanzado(mejor_fitness_global, optimo_conocido, tipo):
+            tiempo_optimo = time.perf_counter() - inicio
+            break
 
     tiempo_total = time.perf_counter() - inicio #tiempo total d ela ejecucion
-    
+
     return mejor_individual_global, mejor_fitness_global, tiempo_total, tiempo_optimo
