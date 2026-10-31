@@ -138,7 +138,7 @@ def optimo_alcanzado(mejor_fitness, optimo_conocido, tipo):
             distancia = 0
         else:
             distancia = 1 / mejor_fitness
-        return distancia <= optimo_conocido
+        return distancia <= optimo_conocido + 1e-9
     return False
 
 def run_genetic_algorithm(population_size, individual_size, num_generations, mutation_rate, individual_generator, fitness_function, 
