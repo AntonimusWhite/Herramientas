@@ -96,4 +96,30 @@ def swap_mutation(individual, mutation_rate):
         individual[posicion1], individual[posicion2] = individual[posicion2], individual[posicion1]
     return individual
 
+# 5. seleccion mejor individuo
+def crearmatingpool(population, fitnesses):
+    mating_pool = []
+    repeticion =0
+    while repeticion <2: #repetir dos veces
+        #creo lista desde 0 hasta population size -1
+        lista = list(range(len(population)))
+        random.shuffle(lista) #barajar 
+        #recorrer la lista en pares
+        for i in range(0, len(lista), 2):
+            posicion = lista[i] #me guardo la posicion del primer individuo
+            posicion2 = lista[i+1] #posicion del segundo individuo
+            #comparo los fitnesses de cada pareja
+            if fitnesses[posicion] >= fitnesses[posicion2]:
+                mating_pool.append(population[posicion]) #population tiene a los individuos
+            else:
+                mating_pool.append(population[posicion2])
+        repeticion = repeticion +1
+    return mating_pool
+
+# Obtiene el mejor individuo de una población y su fitness
+def mejor_individuo(population, fitnesses):
+    mejor_fitness = max(fitnesses)
+    posicion = fitnesses.index(mejor_fitness)
+    mejor_individual = population[posicion]
+    return mejor_individual, mejor_fitness
 
