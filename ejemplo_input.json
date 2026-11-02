@@ -1,0 +1,28 @@
+{
+    "problemas_onemax": [
+    {
+        "tamano_poblacion": 20,
+        "num_generaciones": 30,
+        "tasa_mutacion": 0.1,
+        "longitud_gen": 10,
+        "optimo_conocido": 10
+    },
+    {
+        "tamano_poblacion": [20, 50],
+        "num_generaciones": 30,
+        "tasa_mutacion": [0.05, 0.1, 0.2],
+        "longitud_gen": 15
+    }
+],
+    "problemas_tsp": {
+        "tamano_poblacion": 50,
+        "num_generaciones": 200,
+        "tasa_mutacion": 0.2,
+        "ciudades": [[17, 72], [97, 8], [32, 15], [63, 97]]
+    },
+        "salida": {
+        "guardar_en": "resultados.json",
+        "grafico_rendimiento": true
+    },
+    "num_nucleos": 4
+}
