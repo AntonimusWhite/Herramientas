@@ -4,10 +4,7 @@ import time
 
 # 1. generacion indivisuos
 def generate_individual_bitstring(size): #onemax
-    individuo = []
-    for i in range(size):
-        gen = random.randint(0, 1)
-        individuo.append(gen)
+    individuo = [random.randint(0, 1) for _ in range(size)]
     return individuo
 
 def generate_individual_permutation(size): #tsp
@@ -17,26 +14,19 @@ def generate_individual_permutation(size): #tsp
 
 #Generacion poblaciones
 def generate_population(population_size, individual_generator, size):
-    poblacion = []
-    for i in range(population_size):
-        individuo = individual_generator(size)
-        poblacion.append(individuo)
+    poblacion = [individual_generator(size) for _ in range(population_size)]
     return poblacion
 
 # 2. funciones fitness
 # Calculamos el FITNESS ONEMAX de cada individuo, maximizar los unos
 def fitness_onemax(individual):
-    fitness = 0
-    for genes in individual: #para cada gen en individual
-        fitness = fitness + genes #sumo cada gen al fitness.
+    fitness = sum(individual)
     return fitness
 
 # fitness tsp
 #distances ya no es una variable global por lo que hay que llamarla
 def tsp_distance(route, distances):
-    suma_total = 0
-    for i in range(len(route)):
-        suma_total = distances[route[i]][route[(i+1)%len(route)]] + suma_total
+    suma_total = sum(distances[route[i]][route[(i+1)%len(route)]] for i in range(len(route)))
     return suma_total
 
 def fitness_tsp(route, distances):
@@ -58,10 +48,7 @@ def crossover_bitstring(parent1, parent2):
 
 # Obtiene las ciudades que faltan sin repetir las del segmento fijo
 def fill_remaining_in_order(fixed_segment, source_parent):
-    lista = []
-    for i in range(len(source_parent)):
-        if source_parent[i] not in fixed_segment:
-            lista.append(source_parent[i])
+    lista = [source_parent[i] for i in range(len(source_parent)) if source_parent[i] not in fixed_segment]
     return lista
 
 # Cruce de permutaciones para TSP
@@ -150,10 +137,7 @@ def run_genetic_algorithm(population_size, individual_size, num_generations, mut
 
     population = generate_population(population_size, individual_generator, individual_size) #fun del ej 1
 
-    fitnesses = [] #calcular fitnesses iniciales
-    for individual in population:  #recorre todos los individuos y calcula el fitness
-        fitness = fitness_function(individual, *args) #fitness function sera onemax o tsp, en onemax args esta vacio, en tsp recibe distancias
-        fitnesses.append(fitness)
+    fitnesses = [fitness_function(individual, *args) for individual in population] #calcular fitnesses iniciales
 
     #guardamos el mejor individuo inicial de la poblacion y el fitness
     mejor_individual_global, mejor_fitness_global = mejor_individuo(population, fitnesses)
@@ -198,10 +182,7 @@ def run_genetic_algorithm(population_size, individual_size, num_generations, mut
         population = new_population
 
         #Calcular los nuevos fitnesses y actualizar el mejor individuo
-        fitnesses = []
-        for individual in population:
-            fitness = fitness_function(individual, *args)
-            fitnesses.append(fitness)
+        fitnesses = [fitness_function(individual, *args) for individual in population]
 
         mejor_individual, mejor_fitness = mejor_individuo(population, fitnesses)
 
