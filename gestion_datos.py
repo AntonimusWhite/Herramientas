@@ -124,6 +124,8 @@ def validar_problema(problema, tipo, nombre):
     for tasa in como_lista(problema["tasa_mutacion"]):
         if not es_numero(tasa):
             raise ValueError(f"{nombre}: 'tasa_mutacion' debe ser un número.")
+        if tasa < 0 or tasa > 1:
+            raise ValueError(f"{nombre}: 'tasa_mutacion' debe estar entre 0 y 1.")
 
     # El cruce del motor necesita al menos 4 genes (o ciudades) para elegir el punto de corte
     if tipo == "onemax":
