@@ -19,9 +19,9 @@ from algoritmo_generico import (
 )
 
 
-##########
-# PASO 1 #
-##########
+######################################
+# PASO 1: FUNCIONALIDADES AUXILIARES #
+######################################
 # El diccionario "estado" lo crea main (crear_estado). Estas funciones lo reciben
 # por argumento y usan sus claves: archivo, ejecuciones, historial, config_salida,
 # num_nucleos y tiempo_total.
@@ -38,9 +38,9 @@ def config_sin_matriz(ejecucion):
     return copia
 
 
-###################
-# LECTURA JSON    #
-###################
+########################
+# PASO 2: LECTURA JSON #
+########################
 def cargar_json(ruta):
     # Lee un archivo JSON. Si no existe o está mal formado, lanza ValueError.
     try:
@@ -94,9 +94,9 @@ def agrupar_problemas(datos):
 
     return problemas
 
-###################
-# VALIDACIÓN      #
-###################
+######################
+# PASO 3: VALIDACIÓN #
+######################
 def es_numero(valor):
     return isinstance(valor, (int, float)) and not isinstance(valor, bool)
 
@@ -145,9 +145,9 @@ def validar_problema(problema, tipo, nombre):
     if optimo is not None and not es_numero(optimo):
         raise ValueError(f"{nombre}: 'optimo_conocido' debe ser un número.")
 
-###################
-# EXPANSIÓN       #
-###################
+#####################
+# PASO 4: EXPANSIÓN #
+#####################
 def expandir_hiperparametros(problema):
     # Una ejecución por cada combinación de la rejilla de hiperparámetros.
     poblaciones = como_lista(problema["tamano_poblacion"])
@@ -239,9 +239,9 @@ def cargar_archivo(estado, ruta):
     estado["tiempo_total"] = None
 
 
-###################
-# EJECUCIÓN       #
-###################
+#####################
+# PASO 5: EJECUCIÓN #
+#####################
 def crear_argumentos_ejecucion(ejecuciones):
     """Argumentos posicionales de run_genetic_algorithm para cada ejecución.
     Orden del motor: ..., mutation_function, optimo_conocido, tipo, *args
@@ -322,9 +322,9 @@ def ejecutar_todo(estado):
     estado["tiempo_total"] = segundos_a_hms(time.perf_counter() - inicio)
 
 
-###################
-# EXPORTACIÓN     #
-###################
+#######################
+# PASO 6: EXPORTACIÓN #
+#######################
 def guardar_resultados(estado, ruta):
     # Escribe en un único JSON el tiempo total y el historial completo.
     contenido = {"tiempo_total": estado.get("tiempo_total"), "resultados": estado["historial"]}
