@@ -1,0 +1,1067 @@
+{
+  "tiempo_total": {
+    "horas": 0,
+    "minutos": 0,
+    "segundos": 1.547156199987512
+  },
+  "resultados": [
+    {
+      "tipo": "onemax",
+      "configuracion": {
+        "tamano_poblacion": 20,
+        "num_generaciones": 30,
+        "tasa_mutacion": 0.1,
+        "longitud_gen": 10,
+        "optimo_conocido": 10,
+        "tipo": "onemax",
+        "tamano_problema": 10
+      },
+      "mejor_individuo": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mejor_fitness": 10,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.0006422000005841255
+      },
+      "tiempo_segundos": 0.0006422000005841255,
+      "tiempo_hasta_optimo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.0006413999944925308
+      },
+      "tiempo_hasta_optimo_segundos": 0.0006413999944925308
+    },
+    {
+      "tipo": "onemax",
+      "configuracion": {
+        "tamano_poblacion": 20,
+        "num_generaciones": 30,
+        "tasa_mutacion": 0.05,
+        "longitud_gen": 15,
+        "tipo": "onemax",
+        "tamano_problema": 15
+      },
+      "mejor_individuo": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mejor_fitness": 15,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.0035646000178530812
+      },
+      "tiempo_segundos": 0.0035646000178530812,
+      "tiempo_hasta_optimo": null,
+      "tiempo_hasta_optimo_segundos": null
+    },
+    {
+      "tipo": "onemax",
+      "configuracion": {
+        "tamano_poblacion": 20,
+        "num_generaciones": 30,
+        "tasa_mutacion": 0.1,
+        "longitud_gen": 15,
+        "tipo": "onemax",
+        "tamano_problema": 15
+      },
+      "mejor_individuo": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mejor_fitness": 15,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.0037472000112757087
+      },
+      "tiempo_segundos": 0.0037472000112757087,
+      "tiempo_hasta_optimo": null,
+      "tiempo_hasta_optimo_segundos": null
+    },
+    {
+      "tipo": "onemax",
+      "configuracion": {
+        "tamano_poblacion": 20,
+        "num_generaciones": 30,
+        "tasa_mutacion": 0.2,
+        "longitud_gen": 15,
+        "tipo": "onemax",
+        "tamano_problema": 15
+      },
+      "mejor_individuo": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "mejor_fitness": 14,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.0036801000242121518
+      },
+      "tiempo_segundos": 0.0036801000242121518,
+      "tiempo_hasta_optimo": null,
+      "tiempo_hasta_optimo_segundos": null
+    },
+    {
+      "tipo": "onemax",
+      "configuracion": {
+        "tamano_poblacion": 50,
+        "num_generaciones": 30,
+        "tasa_mutacion": 0.05,
+        "longitud_gen": 15,
+        "tipo": "onemax",
+        "tamano_problema": 15
+      },
+      "mejor_individuo": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mejor_fitness": 15,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.0044442000216804445
+      },
+      "tiempo_segundos": 0.0044442000216804445,
+      "tiempo_hasta_optimo": null,
+      "tiempo_hasta_optimo_segundos": null
+    },
+    {
+      "tipo": "onemax",
+      "configuracion": {
+        "tamano_poblacion": 50,
+        "num_generaciones": 30,
+        "tasa_mutacion": 0.1,
+        "longitud_gen": 15,
+        "tipo": "onemax",
+        "tamano_problema": 15
+      },
+      "mejor_individuo": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mejor_fitness": 15,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.00796670001000166
+      },
+      "tiempo_segundos": 0.00796670001000166,
+      "tiempo_hasta_optimo": null,
+      "tiempo_hasta_optimo_segundos": null
+    },
+    {
+      "tipo": "onemax",
+      "configuracion": {
+        "tamano_poblacion": 50,
+        "num_generaciones": 30,
+        "tasa_mutacion": 0.2,
+        "longitud_gen": 15,
+        "tipo": "onemax",
+        "tamano_problema": 15
+      },
+      "mejor_individuo": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mejor_fitness": 14,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.009128700010478497
+      },
+      "tiempo_segundos": 0.009128700010478497,
+      "tiempo_hasta_optimo": null,
+      "tiempo_hasta_optimo_segundos": null
+    },
+    {
+      "tipo": "onemax",
+      "configuracion": {
+        "tamano_poblacion": 50,
+        "num_generaciones": 200,
+        "tasa_mutacion": 0.05,
+        "longitud_gen": 40,
+        "optimo_conocido": 40,
+        "tipo": "onemax",
+        "tamano_problema": 40
+      },
+      "mejor_individuo": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mejor_fitness": 40,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.05113000003620982
+      },
+      "tiempo_segundos": 0.05113000003620982,
+      "tiempo_hasta_optimo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.051129600033164024
+      },
+      "tiempo_hasta_optimo_segundos": 0.051129600033164024
+    },
+    {
+      "tipo": "onemax",
+      "configuracion": {
+        "tamano_poblacion": 50,
+        "num_generaciones": 300,
+        "tasa_mutacion": 0.02,
+        "longitud_gen": 80,
+        "optimo_conocido": 80,
+        "tipo": "onemax",
+        "tamano_problema": 80
+      },
+      "mejor_individuo": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mejor_fitness": 80,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.06181699997978285
+      },
+      "tiempo_segundos": 0.06181699997978285,
+      "tiempo_hasta_optimo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.061816099972929806
+      },
+      "tiempo_hasta_optimo_segundos": 0.061816099972929806
+    },
+    {
+      "tipo": "onemax",
+      "configuracion": {
+        "tamano_poblacion": 100,
+        "num_generaciones": 300,
+        "tasa_mutacion": 0.02,
+        "longitud_gen": 80,
+        "optimo_conocido": 80,
+        "tipo": "onemax",
+        "tamano_problema": 80
+      },
+      "mejor_individuo": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mejor_fitness": 80,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.14162389998091385
+      },
+      "tiempo_segundos": 0.14162389998091385,
+      "tiempo_hasta_optimo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.1416233999771066
+      },
+      "tiempo_hasta_optimo_segundos": 0.1416233999771066
+    },
+    {
+      "tipo": "tsp",
+      "configuracion": {
+        "tamano_poblacion": 50,
+        "num_generaciones": 200,
+        "tasa_mutacion": 0.2,
+        "ciudades": [
+          [
+            10,
+            5
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            5,
+            10
+          ],
+          [
+            10,
+            0
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            10,
+            10
+          ],
+          [
+            0,
+            10
+          ]
+        ],
+        "optimo_conocido": 40,
+        "tipo": "tsp",
+        "tamano_problema": 8
+      },
+      "mejor_individuo": [
+        3,
+        0,
+        6,
+        2,
+        7,
+        4,
+        1,
+        5
+      ],
+      "mejor_fitness": 0.025,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.0027734999894164503
+      },
+      "tiempo_segundos": 0.0027734999894164503,
+      "tiempo_hasta_optimo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.0027726999833248556
+      },
+      "tiempo_hasta_optimo_segundos": 0.0027726999833248556,
+      "mejor_distancia": 40.0
+    },
+    {
+      "tipo": "tsp",
+      "configuracion": {
+        "tamano_poblacion": 50,
+        "num_generaciones": 300,
+        "tasa_mutacion": 0.1,
+        "ciudades": [
+          [
+            12,
+            4
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            8,
+            12
+          ],
+          [
+            12,
+            12
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            4,
+            12
+          ],
+          [
+            0,
+            12
+          ],
+          [
+            12,
+            8
+          ],
+          [
+            8,
+            0
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        "optimo_conocido": 48,
+        "tipo": "tsp",
+        "tamano_problema": 12
+      },
+      "mejor_individuo": [
+        9,
+        3,
+        2,
+        7,
+        8,
+        4,
+        11,
+        1,
+        5,
+        10,
+        6,
+        0
+      ],
+      "mejor_fitness": 0.020833333333333332,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.034655499970540404
+      },
+      "tiempo_segundos": 0.034655499970540404,
+      "tiempo_hasta_optimo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.03465479996521026
+      },
+      "tiempo_hasta_optimo_segundos": 0.03465479996521026,
+      "mejor_distancia": 48.0
+    },
+    {
+      "tipo": "tsp",
+      "configuracion": {
+        "tamano_poblacion": 50,
+        "num_generaciones": 300,
+        "tasa_mutacion": 0.3,
+        "ciudades": [
+          [
+            12,
+            4
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            8,
+            12
+          ],
+          [
+            12,
+            12
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            4,
+            12
+          ],
+          [
+            0,
+            12
+          ],
+          [
+            12,
+            8
+          ],
+          [
+            8,
+            0
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        "optimo_conocido": 48,
+        "tipo": "tsp",
+        "tamano_problema": 12
+      },
+      "mejor_individuo": [
+        0,
+        6,
+        10,
+        5,
+        1,
+        11,
+        4,
+        8,
+        7,
+        2,
+        3,
+        9
+      ],
+      "mejor_fitness": 0.020833333333333332,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.020792499999515712
+      },
+      "tiempo_segundos": 0.020792499999515712,
+      "tiempo_hasta_optimo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.020791799994185567
+      },
+      "tiempo_hasta_optimo_segundos": 0.020791799994185567,
+      "mejor_distancia": 48.0
+    },
+    {
+      "tipo": "tsp",
+      "configuracion": {
+        "tamano_poblacion": 100,
+        "num_generaciones": 300,
+        "tasa_mutacion": 0.1,
+        "ciudades": [
+          [
+            12,
+            4
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            8,
+            12
+          ],
+          [
+            12,
+            12
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            4,
+            12
+          ],
+          [
+            0,
+            12
+          ],
+          [
+            12,
+            8
+          ],
+          [
+            8,
+            0
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        "optimo_conocido": 48,
+        "tipo": "tsp",
+        "tamano_problema": 12
+      },
+      "mejor_individuo": [
+        9,
+        0,
+        6,
+        10,
+        5,
+        1,
+        11,
+        4,
+        8,
+        7,
+        2,
+        3
+      ],
+      "mejor_fitness": 0.020833333333333332,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.028158099972642958
+      },
+      "tiempo_segundos": 0.028158099972642958,
+      "tiempo_hasta_optimo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.028157500026281923
+      },
+      "tiempo_hasta_optimo_segundos": 0.028157500026281923,
+      "mejor_distancia": 48.0
+    },
+    {
+      "tipo": "tsp",
+      "configuracion": {
+        "tamano_poblacion": 100,
+        "num_generaciones": 300,
+        "tasa_mutacion": 0.3,
+        "ciudades": [
+          [
+            12,
+            4
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            8,
+            12
+          ],
+          [
+            12,
+            12
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            4,
+            12
+          ],
+          [
+            0,
+            12
+          ],
+          [
+            12,
+            8
+          ],
+          [
+            8,
+            0
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        "optimo_conocido": 48,
+        "tipo": "tsp",
+        "tamano_problema": 12
+      },
+      "mejor_individuo": [
+        3,
+        9,
+        0,
+        6,
+        10,
+        5,
+        1,
+        11,
+        4,
+        8,
+        7,
+        2
+      ],
+      "mejor_fitness": 0.020833333333333332,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.02208620001329109
+      },
+      "tiempo_segundos": 0.02208620001329109,
+      "tiempo_hasta_optimo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.022085700009483844
+      },
+      "tiempo_hasta_optimo_segundos": 0.022085700009483844,
+      "mejor_distancia": 48.0
+    },
+    {
+      "tipo": "tsp",
+      "configuracion": {
+        "tamano_poblacion": 30,
+        "num_generaciones": 100,
+        "tasa_mutacion": 0.2,
+        "ciudades": [
+          [
+            17,
+            72
+          ],
+          [
+            97,
+            8
+          ],
+          [
+            32,
+            15
+          ],
+          [
+            63,
+            97
+          ],
+          [
+            41,
+            33
+          ],
+          [
+            80,
+            55
+          ]
+        ],
+        "tipo": "tsp",
+        "tamano_problema": 6
+      },
+      "mejor_individuo": [
+        0,
+        3,
+        5,
+        1,
+        2,
+        4
+      ],
+      "mejor_fitness": 0.0035850252872946325,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.023233700019773096
+      },
+      "tiempo_segundos": 0.023233700019773096,
+      "tiempo_hasta_optimo": null,
+      "tiempo_hasta_optimo_segundos": null,
+      "mejor_distancia": 278.9380603657136
+    },
+    {
+      "tipo": "onemax",
+      "configuracion": {
+        "tamano_poblacion": 20,
+        "num_generaciones": 40,
+        "tasa_mutacion": 0.1,
+        "longitud_gen": 12,
+        "optimo_conocido": 12,
+        "tipo": "onemax",
+        "tamano_problema": 12
+      },
+      "mejor_individuo": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "mejor_fitness": 12,
+      "tiempo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.0009732999606058002
+      },
+      "tiempo_segundos": 0.0009732999606058002,
+      "tiempo_hasta_optimo": {
+        "horas": 0,
+        "minutos": 0,
+        "segundos": 0.0009730999590829015
+      },
+      "tiempo_hasta_optimo_segundos": 0.0009730999590829015
+    }
+  ]
+}
