@@ -272,7 +272,7 @@ def ejecutar_menu(estado):
             if estado["historial"] and not estado["exportado"] and not pedir_si_no(
                     "Hay resultados sin exportar. ¿Salir igualmente?", por_defecto=False):
                 continue
-            print("¡Chau nen!")
+            print("!Adiós!")
             return
         accion = acciones.get(eleccion)
         if accion is None:
