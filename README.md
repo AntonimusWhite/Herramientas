@@ -1,38 +1,22 @@
-# Herramientas
+## Ejecución de problemas
 
-## Carga de problemas
+`gestion_datos.procesar_instancia(ruta)` carga y valida un archivo JSON, y
+expande las combinaciones de hiperparámetros en una lista de ejecuciones.
+Para cada problema TSP, calcula la matriz de distancias una sola vez y la
+asocia a sus ejecuciones.
 
-`gestion_datos.procesar_instancia(ruta)` carga un archivo JSON y devuelve dos
-listas: las ejecuciones OneMax y las ejecuciones TSP, expandidas por cada
-combinación de hiperparámetros. Cada ejecución TSP incluye
-`matriz_distancias`, calculada a partir de `ciudades`.
+`gestion_datos.ejecutar_instancias(ejecuciones, num_nucleos)` ejecuta las
+configuraciones en paralelo mediante `multiprocessing.Pool.starmap` y devuelve
+los resultados en el mismo orden que las ejecuciones recibidas. El número de
+procesos se configura con `num_nucleos`.
 
-Los problemas se declaran en las secciones `problemas_onemax` y
-`problemas_tsp`; cada sección acepta un problema o una lista. Los tres
-hiperparámetros del solucionador aceptan un valor o una lista de valores.
+El menú mantiene la configuración y el historial en un diccionario de estado.
+Al cargar otro archivo, se reinicia el historial. Los resultados incluyen el
+mejor individuo, su fitness y el tiempo de ejecución. Si se configura
+`optimo_conocido` y se alcanza, también se registra el tiempo hasta encontrarlo.
 
-`gestion_datos.ejecutar_instancias(ejecuciones_onemax, ejecuciones_tsp,
-num_nucleos)` ejecuta las configuraciones en paralelo con
-`multiprocessing.Pool.starmap` y devuelve el resultado, la configuración y el
-tiempo de cada ejecución, desglosado en horas, minutos y segundos. Para TSP,
-la matriz de distancias se pasa a la función de fitness mediante `*args`; para
-OneMax no se pasa ningún argumento adicional.
+## Cruce de permutaciones TSP
 
-## Historial, exportación y gráficos
-
-`SesionEjecucion` mantiene en memoria la configuración cargada y el historial
-de resultados de la sesión. Al cargar otro archivo, reemplaza la configuración
-y reinicia el historial. `ejecutar()` procesa las ejecuciones pendientes y
-añade sus resultados al historial. `exportar_resultados()` guarda el archivo
-JSON configurado con la configuración completa y el historial.
-
-Cada resultado incluye el mejor individuo y su fitness, el tiempo total y,
-cuando hay `optimo_conocido` y se alcanza, el tiempo hasta encontrarlo por
-primera vez. El gráfico usa este último tiempo, no el tiempo total. Los
-gráficos se generan por separado para OneMax y TSP, junto al JSON, con nombres
-como `resultados_rendimiento_onemax.png`. Si varias ejecuciones del mismo tipo
-tienen el mismo tamaño N, se representa la media de sus tiempos hasta el
-óptimo. Solo se crea un gráfico cuando hay datos de al menos dos tamaños
-distintos para ese tipo.
-
-Instala las dependencias con `pip install -r requirements.txt`.
+`crossover_permutation` conserva un segmento de un padre y completa el hijo
+con las ciudades restantes en el orden en que aparecen en el otro padre.
+`fill_remaining_in_order` realiza esa selección.
