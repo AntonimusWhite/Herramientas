@@ -266,13 +266,13 @@ def ejecutar_menu(estado):
         mostrar_menu()
         eleccion = pedir_texto("Elige una opción: ")
         if eleccion is None:
-            print("!Adiós!")
+            print("¡Adiós!")
             return
         if eleccion == "6":
             if estado["historial"] and not estado["exportado"] and not pedir_si_no(
                     "Hay resultados sin exportar. ¿Salir igualmente?", por_defecto=False):
                 continue
-            print("!Adiós!")
+            print("¡Adiós!")
             return
         accion = acciones.get(eleccion)
         if accion is None:
