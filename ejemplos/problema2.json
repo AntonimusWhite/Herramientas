@@ -1,0 +1,18 @@
+{
+  "problemas_tsp": [
+  {"tamano_poblacion": 50, "num_generaciones": 300, "tasa_mutacion": 0.2,
+   "ciudades": [[41, 19], [50, 83], [6, 9], [68, 12], [46, 74]],
+   "optimo_conocido": 223.7099065314501},
+  {"tamano_poblacion": 50, "num_generaciones": 300, "tasa_mutacion": 0.2,
+   "ciudades": [[7, 64], [27, 4], [11, 55], [53, 8], [30, 11], [70, 54]],
+   "optimo_conocido": 204.52706472510403},
+  {"tamano_poblacion": 50, "num_generaciones": 300, "tasa_mutacion": 0.2,
+   "ciudades": [[7, 72], [15, 28], [80, 80], [74, 7], [73, 74], [50, 6], [28, 5]],
+   "optimo_conocido": 265.68058986480503},
+  {"tamano_poblacion": 50, "num_generaciones": 300, "tasa_mutacion": 0.2,
+   "ciudades": [[71, 17], [37, 53], [18, 69], [15, 73], [39, 71], [87, 23], [13, 74], [73, 81]],
+   "optimo_conocido": 219.94131660093706}
+],
+  "salida": {"guardar_en": "resultados_prueba.json", "grafico_rendimiento": true},
+  "num_nucleos": 2
+}
