@@ -1,0 +1,10 @@
+# Ignorar todo
+*
+
+# Excepto el propio .gitignore
+!.gitignore
+ 
+# Y excepto estos archivos
+!main.py
+!gestion_datos.py
+!algoritmo_generico.py
