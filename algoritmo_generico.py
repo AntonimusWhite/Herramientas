@@ -202,6 +202,7 @@ def run_genetic_algorithm(population_size, individual_size, num_generations, mut
 
          #comprobar si se ha estancado
         if (max_generaciones_sin_mejora is not None and generaciones_sin_mejora >= max_generaciones_sin_mejora):
+            print(f"Parada por estancamiento en generación {generacion + 1}")
             break
 
     tiempo_total = time.perf_counter() - inicio #tiempo total d ela ejecucion
