@@ -21,6 +21,7 @@ def crear_estado():
         "config_salida": {},
         "num_nucleos": 1,
         "tiempo_total": None,
+        "exportado": False,
     }
 
 
@@ -112,15 +113,33 @@ def describir_parametros(ejecucion):
 
 def opcion_cargar(estado):
     # 1. Carga el archivo
+    if estado["historial"] and not pedir_si_no(
+            "Hay resultados en memoria; cargar un archivo nuevo los descartará. ¿Continuar?",
+            por_defecto=False):
+        print("Operación cancelada.")
+        return
     ruta = pedir_texto("Ruta del archivo JSON (p.ej. problemas/ejemplo.json): ")
     if not ruta:
         print("Operación cancelada.")
         return
 
+    habia_archivo = estado["archivo"] is not None
+    nucleos_previos = estado["num_nucleos"]
+
     # cargar_archivo valida todo antes de tocar el estado: si falla, se conserva lo anterior
-    if llamar_seguro(cargar_archivo, estado, ruta):
-        print(f"Archivo cargado: {len(estado['ejecuciones'])} ejecuciones listas. "
-              f"Núcleos configurados: {estado['num_nucleos']}.")
+    if not llamar_seguro(cargar_archivo, estado, ruta):
+        return
+
+    estado["exportado"] = False
+
+    if habia_archivo and estado["num_nucleos"] != nucleos_previos and pedir_si_no(
+            f"El archivo fija {estado['num_nucleos']} núcleo(s) y tenías {nucleos_previos}. "
+            f"¿Mantener {nucleos_previos}?",
+            por_defecto=False):
+        estado["num_nucleos"] = nucleos_previos
+
+    print(f"Archivo cargado: {len(estado['ejecuciones'])} ejecuciones listas. "
+          f"Núcleos configurados: {estado['num_nucleos']}.")
 
 
 def opcion_ajustar(estado):
@@ -158,6 +177,7 @@ def opcion_ejecutar(estado):
     print(f"Ejecutando {len(estado['ejecuciones'])} ejecuciones "
           f"con {estado['num_nucleos']} núcleo(s)...")
     if llamar_seguro(ejecutar_todo, estado):
+        estado["exportado"] = False
         print(f"Terminado: {len(estado['historial'])} ejecuciones en "
               f"{formatear_tiempo(estado['tiempo_total'])}.")
 
@@ -215,7 +235,8 @@ def opcion_exportar(estado):
         )
 
     # exportar_resultados imprime que ha guardado
-    llamar_seguro(exportar_resultados, estado_exportar)
+    if llamar_seguro(exportar_resultados, estado_exportar):
+        estado["exportado"] = True
 
 
 # --------------
@@ -244,8 +265,14 @@ def ejecutar_menu(estado):
     while True:
         mostrar_menu()
         eleccion = pedir_texto("Elige una opción: ")
-        if eleccion is None or eleccion == "6":
-            print("¡Chau nen!")
+        if eleccion is None:
+            print("¡Adiós!")
+            return
+        if eleccion == "6":
+            if estado["historial"] and not estado["exportado"] and not pedir_si_no(
+                    "Hay resultados sin exportar. ¿Salir igualmente?", por_defecto=False):
+                continue
+            print("¡Adiós!")
             return
         accion = acciones.get(eleccion)
         if accion is None:

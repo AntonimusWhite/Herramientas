@@ -8,3 +8,7 @@
 !main.py
 !gestion_datos.py
 !algoritmo_generico.py
+
+# Carpeta de ejemplos y sus archivos JSON
+!ejemplos/
+!ejemplos/*.json

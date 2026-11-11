@@ -48,8 +48,8 @@ def crossover_bitstring(parent1, parent2):
 
 # Obtiene las ciudades que faltan sin repetir las del segmento fijo
 def fill_remaining_in_order(fixed_segment, source_parent):
-    lista = [source_parent[i] for i in range(len(source_parent)) if source_parent[i] not in fixed_segment]
-    return lista
+    fixed_segment_set = set(fixed_segment) #convierte en un conjunto con set
+    return [city for city in source_parent if city not in fixed_segment_set]
 
 # Cruce de permutaciones para TSP
 def crossover_permutation(parent1, parent2):
@@ -129,11 +129,13 @@ def optimo_alcanzado(mejor_fitness, optimo_conocido, tipo):
     return False
 
 def run_genetic_algorithm(population_size, individual_size, num_generations, mutation_rate, individual_generator, fitness_function, 
-                          crossover_function, mutation_function, optimo_conocido=None, tipo=None, *args):
+                          crossover_function, mutation_function, optimo_conocido=None, tipo=None, max_generaciones_sin_mejora=None, *args):
     
     # Iniciamos el cronómetro
     inicio = time.perf_counter()
     tiempo_optimo = None
+
+    generaciones_sin_mejora = 0 #registra cuantas generacions consecutivas han pasado sin encontrar un fitness superior al global
 
     population = generate_population(population_size, individual_generator, individual_size) #fun del ej 1
 
@@ -154,7 +156,7 @@ def run_genetic_algorithm(population_size, individual_size, num_generations, mut
         #creo padres
         mating_pool = crearmatingpool(population, fitnesses)
 
-        # conservamos el mejor individuo de la poblacion inicial
+        # conservamos el mejor individuo de la poblacion actual
         elite, fitness_elite = mejor_individuo(population, fitnesses)
         elite = elite.copy()
 
@@ -189,10 +191,18 @@ def run_genetic_algorithm(population_size, individual_size, num_generations, mut
         if mejor_fitness > mejor_fitness_global:
             mejor_fitness_global = mejor_fitness
             mejor_individual_global = mejor_individual.copy()
+            generaciones_sin_mejora = 0 # si encontramos una solución mejor se actualiza el mejor individuo y reiniciamos el contado
+        else:
+            generaciones_sin_mejora += 1
 
         # Comprobamos si hemos alcanzado el óptimo conocido
         if optimo_alcanzado(mejor_fitness_global, optimo_conocido, tipo):
             tiempo_optimo = time.perf_counter() - inicio
+            break
+
+         #comprobar si se ha estancado
+        if (max_generaciones_sin_mejora is not None and generaciones_sin_mejora >= max_generaciones_sin_mejora):
+            print(f"Parada por estancamiento en generación {generacion + 1}")
             break
 
     tiempo_total = time.perf_counter() - inicio #tiempo total d ela ejecucion
