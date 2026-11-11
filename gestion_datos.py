@@ -145,6 +145,15 @@ def validar_problema(problema, tipo, nombre):
     if optimo is not None and not es_numero(optimo):
         raise ValueError(f"{nombre}: 'optimo_conocido' debe ser un número.")
 
+    # Validar el número máximo de generaciones sin mejora
+    if "max_generaciones_sin_mejora" in problema:
+        valor = problema["max_generaciones_sin_mejora"]
+        if type(valor) is not int or valor < 1:
+            raise ValueError(
+                f"{nombre}: 'max_generaciones_sin_mejora' debe ser un entero positivo."
+            )
+
+        
 #####################
 # PASO 4: EXPANSIÓN #
 #####################
@@ -261,6 +270,7 @@ def crear_argumentos_ejecucion(ejecuciones):
                 mutate_bitstring,
                 ejecucion.get("optimo_conocido"),
                 "onemax",
+                ejecucion.get("max_generaciones_sin_mejora")
             ))
         else:
             argumentos.append((
@@ -274,7 +284,8 @@ def crear_argumentos_ejecucion(ejecuciones):
                 swap_mutation,
                 ejecucion.get("optimo_conocido"),
                 "tsp",
-                ejecucion["matriz_distancias"],
+                ejecucion.get("max_generaciones_sin_mejora"),
+                ejecucion["matriz_distancias"]
             ))
 
     return argumentos
