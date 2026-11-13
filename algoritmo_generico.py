@@ -177,14 +177,19 @@ def run_genetic_algorithm(population_size, individual_size, num_generations, mut
         for individual in new_population:
             mutation_function(individual, mutation_rate)
 
-        #introducimos el mejor individuo sin mutarlo
-        new_population[0] = elite
+        # Calcular el fitness de los nuevos individuos
+        fitnesses_hijos = [fitness_function(individual, *args) for individual in new_population]
 
-        # Sustituir población anterior por la nueva
+        #introducimos el mejor individuo sin mutarlo, buscamos la posición del peor individuo
+        posicion_peor = fitnesses_hijos.index(min(fitnesses_hijos))
+
+        # Sustituir al peor individuo por la élite
+        new_population[posicion_peor] = elite
+        fitnesses_hijos[posicion_peor] = fitness_elite
+
+        # Sustituir población anterior por la nueva y fitnesses
         population = new_population
-
-        #Calcular los nuevos fitnesses y actualizar el mejor individuo
-        fitnesses = [fitness_function(individual, *args) for individual in population]
+        fitnesses = fitnesses_hijos
 
         mejor_individual, mejor_fitness = mejor_individuo(population, fitnesses)
 
